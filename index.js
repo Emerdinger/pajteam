@@ -5,6 +5,8 @@ const dotenv = require('dotenv');
 const cors = require('cors');
 dotenv.config();
 
+const port = process.env.PORT || 3977;
+
 mongoose.set('strictQuery', false);
 
 mongoose.connect(process.env.MONGO_URL, () => {
@@ -16,6 +18,6 @@ app.use(express.json());
 
 app.use('/v1/pajeros', require('./routes/pajeros'));
 
-app.listen(8080, () => {
-    console.log("Corriendo el servidor");
+app.listen(port, () => {
+    console.log("Corriendo el servidor en el puerto : " + port);
 })
