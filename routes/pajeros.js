@@ -39,6 +39,18 @@ router.put("/:id", async (req, res) => {
     }
 })
 
+router.put("/restar/:id", async (req, res) => {
+    try {
+        const pajero = await Pajero.findOne({ usuario: req.params.id });
+        await pajero.updateOne({
+            pajas: pajero.pajas-1
+        })
+        res.status(200).json(await Pajero.findOne({ usuario: req.params.id }));
+    } catch (error) {
+        res.status(500).json(error);
+    }
+})
+
 router.get("/all", async (req, res) => {
     try {
         const pajeros = await Pajero.find();
